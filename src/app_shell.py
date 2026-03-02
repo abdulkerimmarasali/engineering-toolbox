@@ -132,28 +132,37 @@ class ModuleHostScreen(QWidget):
         root.addWidget(self.body, 1)
 
     def load_module(self, spec: ModuleSpec):
-        self.header.lbl_title.setText(spec.display_name)
+    self.header.lbl_title.setText(spec.display_name)
 
-        # clear old
-        if self._current is not None:
-            self._current.setParent(None)
-            self._current.deleteLater()
-            self._current = None
+    # clear old
+    if self._current is not None:
+        self._current.setParent(None)
+        self._current.deleteLater()
+        self._current = None
 
-        # dynamic import
+    try:
         module = importlib.import_module(spec.import_path)
         cls = getattr(module, spec.class_name)
 
-        # IMPORTANT:
-        # Yeni standart: modül constructor'ı cls(go_back_callback) bekler.
-        # Eski modüller için fallback: cls()
         try:
-            widget = cls(self._on_back)   # <-- pozisyonel callback
+            widget = cls(self._on_back)   # callback (pozisyonel)
         except TypeError:
             widget = cls()
 
         self._current = widget
         self.body_lay.addWidget(widget)
+
+    except Exception as e:
+        # Uygulama kapanmasın: hata mesajı göster
+        from PyQt5.QtWidgets import QMessageBox
+        import traceback
+        tb = traceback.format_exc()
+        QMessageBox.critical(
+            self,
+            "Modül Yükleme Hatası",
+            f"Modül açılamadı:\n\n{spec.import_path}.{spec.class_name}\n\nHata:\n{e}\n\nDetay:\n{tb}"
+        )
+        return
 
 
 class AppShell(QMainWindow):

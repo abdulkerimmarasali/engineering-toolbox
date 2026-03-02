@@ -1,4 +1,0 @@
-pyinstaller --noconfirm --clean --windowed --onefile --name EngineeringToolbox ^
-  --paths src ^
-  --add-data "data\sstm_veritabani.db;data" ^
-  src\main.py

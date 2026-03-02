@@ -2,15 +2,13 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 
-from .app_shell import AppShell
+from app_shell import AppShell  # <-- noktasız (relative değil)
 
-
-def main() -> None:
+def main():
     app = QApplication(sys.argv)
-    win = AppShell()
-    win.show()
-    sys.exit(app.exec())
-
+    w = AppShell()
+    w.show()
+    sys.exit(app.exec_())
 
 if __name__ == "__main__":
     main()

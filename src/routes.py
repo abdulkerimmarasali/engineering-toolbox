@@ -1,20 +1,20 @@
 # src/routes.py
 CATEGORIES = {
     "Basınçlı Kap": [
-        ("Gövde Et Kalınlığı", "src.modules.mbetkalinligi", "MbEtKalinligiModule"),
-        ("Elips Kubbe", "src.modules.elipskubbe", "ElipsKubbeModule"),
+        ("Gövde Et Kalınlığı", "modules.mbetkalinligi", "MbEtKalinligiModule"),
+        ("Elips Kubbe", "modules.elipskubbe", "ElipsKubbeModule"),
     ],
     "Cıvatalar / Diş": [
-        ("Cıvata Sayısı (Eksenel)", "src.modules.civatasayisi", "CivataSayisiModule"),
-        ("Metrik Diş", "src.modules.metrikdis", "MetrikDisModule"),
-        ("Radyal Cıvata Kesme", "src.modules.radyalcivatasayisi", "RadyalCivataSayisiModule"),
+        ("Cıvata Sayısı (Eksenel)", "modules.civatasayisi", "CivataSayisiModule"),
+        ("Metrik Diş", "modules.metrikdis", "MetrikDisModule"),
+        ("Radyal Cıvata Kesme", "modules.radyalcivata", "RadyalCivataModule"),
     ],
     "Sızdırmazlık (O-Ring)": [
-        ("Alın Conta", "src.modules.alinconta", "AlinContaModule"),
-        ("Çap Conta", "src.modules.capconta", "CapContaModule"),
-        ("Alın Conta Civata Yerleşimi", "src.modules.alincontacivata", "AlinContaCivataModule"),
+        ("Alın Conta", "modules.alinconta", "AlinContaModule"),
+        ("Çap Conta", "modules.capconta", "CapContaModule"),
+        ("Alın Conta Civata Yerleşimi", "modules.alincontacivata", "AlinContaCivataModule"),
     ],
     "Segman": [
-        ("Segman Dayanım", "src.modules.segmandayanim", "SegmanDayanimModule"),
+        ("Segman Dayanım", "modules.segman", "SegmanModule"),
     ],
 }

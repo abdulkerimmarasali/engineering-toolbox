@@ -24,12 +24,7 @@ jobs:
           pip install pyinstaller PyQt5
 
       - name: Build (onedir)
-        shell: pwsh
-        run: |
-            pyinstaller --noconfirm --clean --windowed --name EngineeringToolbox ^
-              --add-data "data\sstm_veritabani.db;data" ^
-              --collect-submodules src.modules ^
-              src\main.py
+        run: pyinstaller --noconfirm --clean --windowed --name EngineeringToolbox --add-data "data\sstm_veritabani.db;data" --collect-submodules src.modules src\main.py
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4

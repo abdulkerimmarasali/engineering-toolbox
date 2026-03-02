@@ -19,7 +19,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 
-from utils import parse_float
+from src.utils import parse_float
 
 
 class SegmanDayanimModule(QWidget):

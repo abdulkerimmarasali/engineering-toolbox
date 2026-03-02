@@ -24,6 +24,16 @@ def to_float(text: str, field_name: str) -> float:
         raise ValueError(f"{field_name} sayısal olmalıdır.") from e
 
 
+def parse_float(text: str, field_name: str) -> float:
+    """
+    Backward/forward compatible numeric parse.
+
+    Not: Projedeki modüller parse_float ismini kullanıyor.
+    Bu fonksiyon, to_float ile aynı davranışı sağlar.
+    """
+    return to_float(text, field_name)
+
+
 def msg_error(parent, title: str, text: str) -> None:
     QMessageBox.critical(parent, title, text)
 

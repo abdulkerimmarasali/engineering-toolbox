@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import (
     QListWidget, QListWidgetItem, QFrame
 )
 
-from src.routes import CATEGORIES
+from routes import CATEGORIES
 
 @dataclass(frozen=True)
 class ModuleSpec:

@@ -26,9 +26,9 @@ jobs:
       - name: Build (onedir)
         shell: pwsh
         run: |
-            pyinstaller --noconfirm --clean --windowed --name EngineeringToolbox `
-              --paths src `
-              --add-data "data\sstm_veritabani.db;data" `
+            pyinstaller --noconfirm --clean --windowed --name EngineeringToolbox ^
+              --add-data "data\sstm_veritabani.db;data" ^
+              --collect-submodules src.modules ^
               src\main.py
 
       - name: Upload artifact

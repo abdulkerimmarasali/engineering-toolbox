@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication
 
-from src.app_shell import AppShell
+from app_shell import AppShell  # <-- DİKKAT: src.app_shell değil
 
 def main():
     app = QApplication(sys.argv)

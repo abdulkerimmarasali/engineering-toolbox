@@ -16,8 +16,8 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtCore import Qt
 
-from db import fetch_all
-from utils import parse_float
+from src.db import fetch_all, fetch_one
+from src.utils import parse_float
 
 
 class CapContaModule(QWidget):

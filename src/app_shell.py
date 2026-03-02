@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import importlib
 from dataclasses import dataclass
-from typing import List, Optional, Tuple
+from typing import Optional
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
@@ -144,9 +144,11 @@ class ModuleHostScreen(QWidget):
         module = importlib.import_module(spec.import_path)
         cls = getattr(module, spec.class_name)
 
-        # allow modules to accept an optional back callback (recommended)
+        # IMPORTANT:
+        # Yeni standart: modül constructor'ı cls(go_back_callback) bekler.
+        # Eski modüller için fallback: cls()
         try:
-            widget = cls(on_back=self._on_back)
+            widget = cls(self._on_back)   # <-- pozisyonel callback
         except TypeError:
             widget = cls()
 
@@ -168,17 +170,17 @@ class AppShell(QMainWindow):
         self.mod_list = ModuleListScreen(on_back=self.back_to_menu, on_open_module=self.open_module)
         self.mod_host = ModuleHostScreen(on_back=self.back_to_category)
 
-        self.stack.addWidget(self.menu)      # index 0
-        self.stack.addWidget(self.mod_list)  # index 1
-        self.stack.addWidget(self.mod_host)  # index 2
+        self.stack.addWidget(self.menu)
+        self.stack.addWidget(self.mod_list)
+        self.stack.addWidget(self.mod_host)
 
-        self.stack.setCurrentIndex(0)
+        # index bağımlılığına girmeden açılış
+        self.stack.setCurrentWidget(self.menu)
+
         self._current_category: Optional[str] = None
-
         self._apply_basic_style()
 
     def _apply_basic_style(self):
-        # Minimal clean style (can be moved to assets/theme.qss later)
         self.setStyleSheet("""
             QMainWindow { background: #f3f4f6; }
             QFrame#HeaderBar { background: #ffffff; border: 1px solid #e5e7eb; border-radius: 10px; }
@@ -191,7 +193,6 @@ class AppShell(QMainWindow):
         """)
 
     # ---- navigation ----
-
     def open_category(self, category: str):
         self._current_category = category
         self.mod_list.set_category(category)
